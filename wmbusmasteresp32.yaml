@@ -1,0 +1,121 @@
+esphome:
+  name: "wmbusmaster-esp32"
+  friendly_name: WMbus ESP32
+
+esp32:
+  board: nodemcu-32s
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+
+ota:
+  - platform: esphome
+
+
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid
+    - password: !secret wifi_password
+    - ssid: !secret 1_wifi_ssid
+    - password: !secret 1_wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "WMbus Hotspot pass: itheuca012"
+    password: "itheuca012"
+
+switch:
+  - platform: factory_reset
+    name: Restart with Factory Default Settings
+
+button:
+  - platform: restart
+    name: "WMbus Restart"
+
+captive_portal:
+web_server:
+  port: 80
+
+external_components:
+  - source: github://SzczepanLeon/esphome-components@version_4 # ESP32, Arduino, CC1101
+    components: [ wmbus ]
+
+time:
+  - platform: sntp
+    id: time_sntp
+
+wmbus:
+  sync_mode: True
+  log_all: True
+  
+  mosi_pin: GPIO23 ## SI:   
+  miso_pin: GPIO19 ## SO:   
+  clk_pin:  GPIO18 ## SCLK: 
+  cs_pin:   GPIO21 ## CSN:  
+  gdo0_pin: GPIO25 ## GD00: 
+  gdo2_pin: GPIO26 ## GD02: 
+
+sensor:
+  - platform: wmbus
+    meter_id: 0x55232207
+    type: sharky774
+    key: "51728910e66d83f851728910e66d83f8"
+    sensors:
+      - name: "my SONOmetar RSSi"
+        field: "rssi"
+        accuracy_decimals: 0
+        unit_of_measurement: "dBm"
+        device_class: "signal_strength"
+        state_class: "measurement"
+        entity_category: "diagnostic"
+
+      - name: "heat volume power"
+        field: "power"
+        accuracy_decimals: 3
+        unit_of_measurement: "kw"
+        device_class: "energy"
+        state_class: "measurement"
+        icon: "mdi:water-boiler"
+
+      - name: "ukupnoKWH"
+        id: "kal_kwh"
+        field: "total_energy_consumption"
+        accuracy_decimals: 0
+        unit_of_measurement: "kWh"
+        device_class: "energy"
+        state_class: "total_increasing"
+        icon: "mdi:water"
+
+      - name: "Ulazna temperatura"
+        field: "flow_temperature"
+        unit_of_measurement: "°C"
+        icon: "mdi:water-percent"
+        device_class: "temperature"
+        state_class: "measurement"
+        accuracy_decimals: 1
+
+      - name: "Izlazna temperatura"
+        field: "return_temperature"
+        unit_of_measurement: "°C"
+        icon: "mdi:water-percent"
+        device_class: "temperature"
+        state_class: "measurement"
+        accuracy_decimals: 1
+
+      - name: "my  water"
+        field: "total_volume"
+        accuracy_decimals: 3
+        unit_of_measurement: "m³"
+        device_class: "water"
+        state_class: "total"
+        icon: "mdi:water"
+
+
+
+
