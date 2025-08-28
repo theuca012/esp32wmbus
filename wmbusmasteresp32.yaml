@@ -61,60 +61,7 @@ wmbus:
   gdo0_pin: GPIO25 ## GD00: 
   gdo2_pin: GPIO26 ## GD02: 
 
-sensor:
-  - platform: wmbus
-    meter_id: 0x55232207
-    type: sharky774
-    key: "51728910e66d83f851728910e66d83f8"
-    sensors:
-      - name: "my SONOmetar RSSi"
-        field: "rssi"
-        accuracy_decimals: 0
-        unit_of_measurement: "dBm"
-        device_class: "signal_strength"
-        state_class: "measurement"
-        entity_category: "diagnostic"
 
-      - name: "heat volume power"
-        field: "power"
-        accuracy_decimals: 3
-        unit_of_measurement: "kw"
-        device_class: "energy"
-        state_class: "measurement"
-        icon: "mdi:water-boiler"
-
-      - name: "ukupnoKWH"
-        id: "kal_kwh"
-        field: "total_energy_consumption"
-        accuracy_decimals: 0
-        unit_of_measurement: "kWh"
-        device_class: "energy"
-        state_class: "total_increasing"
-        icon: "mdi:water"
-
-      - name: "Ulazna temperatura"
-        field: "flow_temperature"
-        unit_of_measurement: "°C"
-        icon: "mdi:water-percent"
-        device_class: "temperature"
-        state_class: "measurement"
-        accuracy_decimals: 1
-
-      - name: "Izlazna temperatura"
-        field: "return_temperature"
-        unit_of_measurement: "°C"
-        icon: "mdi:water-percent"
-        device_class: "temperature"
-        state_class: "measurement"
-        accuracy_decimals: 1
-
-      - name: "my  water"
-        field: "total_volume"
-        accuracy_decimals: 3
-        unit_of_measurement: "m³"
-        device_class: "water"
-        state_class: "total"
-        icon: "mdi:water"
 
 
 
