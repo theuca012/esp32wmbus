@@ -13,10 +13,8 @@ logger:
 # Enable Home Assistant API
 api:
 
-
 ota:
   - platform: esphome
-
 
 wifi:
   networks:
@@ -54,12 +52,12 @@ wmbus:
   sync_mode: True
   log_all: True
   
-  mosi_pin: GPIO23 ## SI:   
-  miso_pin: GPIO19 ## SO:   
-  clk_pin:  GPIO18 ## SCLK: 
-  cs_pin:   GPIO21 ## CSN:  
-  gdo0_pin: GPIO25 ## GD00: 
-  gdo2_pin: GPIO26 ## GD02: 
+  mosi_pin: GPIO23 ## SI   
+  miso_pin: GPIO19 ## SO   
+  clk_pin:  GPIO18 ## SCLK 
+  cs_pin:   GPIO21 ## CSN  
+  gdo0_pin: GPIO25 ## GD00 
+  gdo2_pin: GPIO26 ## GD02 
 
 
 
